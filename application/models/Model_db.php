@@ -18,14 +18,14 @@ class Model_table_post_admin extends CI_Model{
         $this->db->delete('post');
         return true;
     }
-    public function insert($data_insert){
+    public function add($data_insert){
         $this->db->insert('post',$data_insert);
     }
     public function getById($id){
         $this->db->where("stt", $id);
         return $this->db->get('post')->result();
    }
-   public function update($data_update, $id){
+   public function edit($data_update, $id){
         $this->db->where("stt", $id);
         $this->db->update('post', $data_update);
         
