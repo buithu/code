@@ -9,8 +9,8 @@ class Controller_admin_article extends CI_Controller {
     }
 
     public function index(){
-	    $this->load->model("Model_table_post_admin");
-	    $config['total_rows'] = $this->Model_table_post_admin->count_table_data();
+	    $this->load->model("Model_db");
+	    $config['total_rows'] = $this->Model_db->count_table_data();
         $config['base_url'] = base_url()."home/index";
         $config['per_page'] = 3;
         $config['full_tag_open'] = "<ul class='pagination'>";
@@ -29,24 +29,24 @@ class Controller_admin_article extends CI_Controller {
 		$config['last_tagl_close'] = "</li>";
         $start=$this->uri->segment(3);
         $this->load->library('pagination', $config);
-        $data['data']= $this->Model_table_post_admin->listdata($config['per_page'],$start);
+        $data['data']= $this->Model_db->listdata($config['per_page'],$start);
         $data['subview'] = 'admin/index';
         $this->load->view("admin/layout/main", $data);
 			
 		}
         
     public function delete() {
-        $this->load->model('Model_table_post_admin');
+        $this->load->model('Model_db');
         $id = $this->input->get('id');
-        if($this->Model_table_post_admin->delete($id)){
+        if($this->Model_db->delete($id)){
             redirect(base_url() . "home");
         }
         
     }
     public function edit(){
-        $this->load->model('Model_table_post_admin');
+        $this->load->model('Model_db');
         $id = $this->input->get('id');
-        $data['dl']=$this->Model_table_post_admin->getById($id);
+        $data['dl']=$this->Model_db->getById($id);
         $data['subview'] = 'admin/edit_artilcle';
         $this->load->view("admin/layout/main", $data);
         if ($this->input->post("ok")) {
@@ -54,7 +54,7 @@ class Controller_admin_article extends CI_Controller {
                 "tit" => $this->input->post("username"),
                 "con" => $this->input->post("pass"),  
             );
-            $this->Model_table_post_admin->update($data_update, $this->input->post("stt"));
+            $this->Model_db->update($data_update, $this->input->post("stt"));
             redirect(base_url() . "home");
         }
     }
@@ -89,13 +89,13 @@ class Controller_admin_article extends CI_Controller {
         $this->load->view('admin/layout/main',$data);
         if ($this->input->post("ok")) {
             
-        $this->load->model("Model_table_post_admin");
+        $this->load->model("Model_db");
          $data_insert = array(
                "tit" => $this->input->post("username"),
                "con" => $this->input->post("pass"),
                "img" => $check['file_name'],
         );
-        $this->Model_table_post_admin->insert($data_insert);
+        $this->Model_db->insert($data_insert);
            
         redirect(base_url() . "home");
         }

@@ -1,5 +1,5 @@
 <?php
-class Model_table_post_admin extends CI_Model{
+class Model_db extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->load->database();
