@@ -4,7 +4,7 @@ class Model_db extends CI_Model{
         parent::__construct();
         $this->load->database();
     }
-    public function count_table_data(){
+    public function count_data(){
         $data1 = $this->db->get('post')->num_rows();
         return $data1;
     }
@@ -25,6 +25,7 @@ class Model_db extends CI_Model{
         $this->db->where("stt", $id);
         return $this->db->get('post')->result();
    }
+   
    public function edit($data_update, $id){
         $this->db->where("stt", $id);
         $this->db->update('post', $data_update);
