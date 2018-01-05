@@ -2,14 +2,14 @@
 function menu($id_menu = 0){
 	//kết bối db
 	$conn = new pdo('mysql:host=localhost;dbname=menu','root','');
-	$query=$conn->query("SELECT * from menu where parent_id = $id_menu");
+	$result = $conn->query("SELECT * from menu where parent_id = $id_menu");
 	//thực hiện câu lệch sql
-	$query->execute();
+	$result->execute();
 	//lấy dữ liệu
-	foreach ($query as $key ) {
+	foreach ($result as $menu ) {
 		echo "<ul>";
-		echo '<li>'.$key['name'].'</li>'.'<br>';
-		menu($key['id']);
+		echo '<li>'.$menu['name'].'</li>'.'<br>';
+		menu($menu['id']);
 		echo "</ul>";
 	}
 }
