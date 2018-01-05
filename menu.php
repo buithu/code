@@ -1,8 +1,8 @@
 <?php 
-function menu($id_menu=0){
+function menu($id_menu = 0){
 	//kết bối db
 	$conn = new pdo('mysql:host=localhost;dbname=menu','root','');
-	$query=$conn->query("SELECT * from menu where parent_id= $id_menu");
+	$query=$conn->query("SELECT * from menu where parent_id = $id_menu");
 	//thực hiện câu lệch sql
 	$query->execute();
 	//lấy dữ liệu
